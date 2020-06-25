@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {Divider} from '../components/divider';
+import {Article} from '../components/article';
 
 export const ArticleScreen = ({route}) => {
   const {title, urlToImage, content, author, source} = route.params.data;
@@ -8,9 +9,7 @@ export const ArticleScreen = ({route}) => {
     <View style={styles.mainContainer}>
       <Divider />
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
-        <Image style={styles.image} source={{uri: urlToImage}} />
-        <Text style={styles.description}>{content}</Text>
+        <Article title={title} description={content} image={urlToImage} />
         <Text style={styles.description}>Author: {author}</Text>
         <Text style={styles.description}>From {source.name}</Text>
       </View>
