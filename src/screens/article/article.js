@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, View, Text} from 'react-native';
-import {Divider} from '../components/divider';
-import {Article} from '../components/article';
+import {Divider} from '../../components/divider';
+import {Article} from '../../components/article';
 
 export const ArticleScreen = ({route}) => {
   const {title, urlToImage, content, author, source} = route.params.data;
@@ -36,3 +37,27 @@ const styles = StyleSheet.create({
   title: {fontSize: 18, fontWeight: 'bold', marginBottom: 10},
   description: {marginBottom: 10},
 });
+
+ArticleScreen.propTypes = {
+  /**
+   * navigation route object
+   */
+  route: PropTypes.object.isRequired,
+};
+
+ArticleScreen.defaultProps = {
+  route: {
+    params: {
+      data: {
+        title: 'Article title',
+        content: 'Content...',
+        author: 'author',
+        source: {
+          name: 'source',
+        },
+        urlToImage:
+          'https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/ebv2ppyibu0yhvlecqlh.png',
+      },
+    },
+  },
+};

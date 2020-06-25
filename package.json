@@ -34,5 +34,25 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react-native@1.0.18"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm",
+    "overrides": {
+      "*": {
+        "dependencies": {
+          "react": "-",
+          "react-native": "-"
+        },
+        "peerDependencies": {
+          "react": "16.11.0",
+          "react-native": "0.62.2"
+        }
+      }
+    },
+    "defaultScope": "joshk.reactnative-with-nativeapi-and-data-fetching"
   }
 }

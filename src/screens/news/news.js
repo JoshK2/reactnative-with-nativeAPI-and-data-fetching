@@ -1,22 +1,27 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import {Input} from '../components/input';
-import {Button} from '../components/button';
-import {Divider} from '../components/divider';
-import {Article} from '../components/article';
-import {getNews} from '../api/news';
+import {Input} from '../../components/input';
+import {Button} from '../../components/button';
+import {Divider} from '../../components/divider';
+import {Article} from '../../components/article';
+import {getNews} from '../../api/news';
 
 export class NewsScreen extends Component {
-  state = {
-    searchValue: '',
-    articles: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: '',
+      articles: props.articles || [],
+    };
+  }
 
   onChangeText = (text) => this.setState({searchValue: text});
 
-  onSearch = async () => {
+  handleSearch = async () => {
+    const {onSearch = getNews} = this.props;
     const {searchValue} = this.state;
-    const news = await getNews(searchValue);
+    const news = await onSearch(searchValue);
     this.setState({articles: news.articles});
   };
 
@@ -32,7 +37,7 @@ export class NewsScreen extends Component {
           value={searchValue}
         />
         <Divider />
-        <Button title="Search" onPress={this.onSearch} />
+        <Button title="Search" onPress={this.handleSearch} />
         <Divider />
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           {articles &&
@@ -44,6 +49,7 @@ export class NewsScreen extends Component {
                   description={article.description}
                   image={article.urlToImage}
                   onPress={() =>
+                    navigation &&
                     navigation.navigate('Article', {data: article})
                   }
                 />
@@ -63,3 +69,14 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
   },
 });
+
+NewsScreen.propTypes = {
+  /**
+   * articles arrays of object
+   */
+  articles: PropTypes.object,
+  /**
+   * onSearch function to get data from api
+   */
+  onSearch: PropTypes.func,
+};

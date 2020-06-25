@@ -1,0 +1,1 @@
+export {LocalizationScreen} from './localization';
