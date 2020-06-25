@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import {Input} from '../components/text-input';
+import {Input} from '../components/input';
 import {Button} from '../components/button';
 import {Divider} from '../components/divider';
 import {Article} from '../components/article';
