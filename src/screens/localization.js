@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Divider} from '../components/divider';
-import {Article} from '../components/article';
+import {Divider} from '../components/divider/divider';
 
 export const LocalizationScreen = () => {
   return (
