@@ -14,16 +14,20 @@ export class NewsScreen extends Component {
       searchValue: '',
       articles: props.articles || [],
     };
+    this.onChangeText = this.onChangeText.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
-  onChangeText = (text) => this.setState({searchValue: text});
+  onChangeText(text) {
+    this.setState({searchValue: text});
+  }
 
-  handleSearch = async () => {
+  async handleSearch() {
     const {onSearch = getNews} = this.props;
     const {searchValue} = this.state;
     const news = await onSearch(searchValue);
     this.setState({articles: news.articles});
-  };
+  }
 
   render() {
     const {navigation} = this.props;
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
 
 NewsScreen.propTypes = {
   /**
-   * articles arrays of object
+   *  articles arrays of object
    */
   articles: PropTypes.object,
   /**
